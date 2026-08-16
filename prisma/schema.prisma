@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model Employee {
-  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id            String         @id @default(uuid())
   empCode       String         @unique
   salesOfficer  String
   tl            String
@@ -27,11 +27,12 @@ model Employee {
 }
 
 model AttendanceLog {
-  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id          String           @id @default(uuid())
   empCode     String
   date        DateTime         @db.Date
   status      AttendanceStatus @default(PRESENT)
-  checkInTime DateTime?
+  checkInTime  DateTime?
+  checkOutTime DateTime?
   createdAt   DateTime         @default(now())
   employee    Employee         @relation(fields: [empCode], references: [empCode], onDelete: Cascade)
 
@@ -42,7 +43,7 @@ model AttendanceLog {
 }
 
 model AdminOTP {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String   @id @default(uuid())
   email     String
   otpHash   String
   expiresAt DateTime
