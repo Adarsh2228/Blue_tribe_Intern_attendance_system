@@ -1,0 +1,60 @@
+// Prisma schema for Employee Attendance Management System
+// Database: CockroachDB (PostgreSQL-compatible)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  empCode       String         @unique
+  salesOfficer  String
+  tl            String
+  city          String
+  dateOfJoining DateTime       @db.Date
+  agencyName    String
+  passwordHash  String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  attendance    AttendanceLog[]
+
+  @@map("employees")
+}
+
+model AttendanceLog {
+  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  empCode     String
+  date        DateTime         @db.Date
+  status      AttendanceStatus @default(PRESENT)
+  checkInTime DateTime?
+  createdAt   DateTime         @default(now())
+  employee    Employee         @relation(fields: [empCode], references: [empCode], onDelete: Cascade)
+
+  @@unique([empCode, date])
+  @@index([date])
+  @@index([empCode])
+  @@map("attendance_logs")
+}
+
+model AdminOTP {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email     String
+  otpHash   String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("admin_otps")
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  HALF_DAY
+}
