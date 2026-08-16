@@ -60,7 +60,7 @@ function Sidebar({ active, setActive, onLogout }: { active: ActiveTab; setActive
             <Building2 size={20} color="white" />
           </div>
           <div>
-            <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>KLaw Attendance</p>
+            <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>Blue Tribe Intern Attendance Portal</p>
             <p style={{ fontSize: 11, color: 'var(--text-muted)' }}>Admin Panel</p>
           </div>
         </div>

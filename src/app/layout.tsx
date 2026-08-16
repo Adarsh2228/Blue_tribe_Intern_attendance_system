@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'KLaw Attendance — Employee Attendance Management System',
-  description:
-    'A modern, full-featured attendance management system for tracking employee check-ins, viewing analytics, and exporting reports.',
+  title: 'Blue Tribe Intern Attendance Portal',
+  description: 'Manage employee attendance efficiently',
   keywords: ['attendance', 'employee management', 'HR system', 'check-in'],
 }
 

@@ -193,7 +193,7 @@ export default function EmployeeDashboard() {
           </div>
           <div>
             <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
-              KLaw Attendance
+              Blue Tribe Intern Attendance Portal
             </p>
             <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>
               Employee Portal
